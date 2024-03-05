@@ -60,13 +60,12 @@ def svpwm():
     theta = np.linspace(-np.pi / 2, 4 * np.pi, n)
     sin_cos = np.array([[np.cos(theta), np.sin(theta)], [-np.sin(theta), np.cos(theta)]])
     sin_cos = np.transpose(sin_cos, (2, 0, 1))
-    # 频率为1，变换后为直线，频率大于1，变换后为频率减少1的正弦函数
+
     a = 350 * np.cos(theta)
     b = 350 * np.cos(theta - 2 / 3 * np.pi)
     c = 350 * np.cos(theta + 2 / 3 * np.pi)
     vdc = 700
 
-    # 3D数组的维度(2, 1, 3000)表示2个1*3000的矩阵，在计算中转换成(3000, 2, 1)
     alpha_beta = 2 / 3 * np.array([[1, -0.5, -0.5], [0, np.sqrt(3) / 2, -np.sqrt(3) / 2]]) @ np.transpose(
         np.array([[a], [b], [c]]), (2, 0, 1))
 
